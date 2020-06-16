@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:section7_mealsapp_flutter/models/meal.dart';
 import '../models/meal.dart';
+import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -11,6 +11,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -18,6 +19,7 @@ class MealItem extends StatelessWidget {
     @required this.affordability,
   });
 
+  //getters are needed to convert enums into human readable form
   String get complexityText {
     switch (complexity) {
       case Complexity.Simple:
@@ -38,24 +40,30 @@ class MealItem extends StatelessWidget {
     if(complexity==Complexity.Simple){return 'Simple';}
     */
   }
+
   String get affordabilityText {
-    if(affordability==Affordability.Affordable){
+    if (affordability == Affordability.Affordable) {
       return 'Affordable';
-    } else if(affordability==Affordability.Pricey){
+    } else if (affordability == Affordability.Pricey) {
       return 'Pricey';
-    } else if(affordability==Affordability.Luxurious){
+    } else if (affordability == Affordability.Luxurious) {
       return 'Luxurious';
     } else {
       return 'Unknown';
     }
   }
 
-  void selectMeal() {}
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          '/meal-detail',
+          arguments: {
+            'id': id,
+          },
+        );
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
