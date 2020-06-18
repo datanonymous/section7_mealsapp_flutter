@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem({
     @required this.id,
@@ -17,6 +18,7 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
+    @required this.removeItem,
   });
 
   //getters are needed to convert enums into human readable form
@@ -58,11 +60,16 @@ class MealItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
-          '/meal-detail',
+          '/meal-detail', //can also use MealDetailScreen.routeName, arguments
           arguments: {
             'id': id,
           },
-        );
+        ).then((value) { //when MealDetailScreen has popped, then do this
+          if(value!=null){
+            removeItem(value);
+          }
+          print(value);
+        });
       },
       child: Card(
         shape: RoundedRectangleBorder(
