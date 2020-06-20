@@ -6,6 +6,7 @@ import '../models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
 
+  //receiving favoriteMeals list from main.dart
   final List<Meal> favoriteMeals;
   TabsScreen(this.favoriteMeals);
 

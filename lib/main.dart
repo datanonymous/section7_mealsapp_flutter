@@ -58,8 +58,14 @@ class _MyAppState extends State<MyApp> {
         _favoriteMeals.removeAt(existingIndex);
       });
     } else {
-      _favoriteMeals.add(DUMMY_MEALS.firstWhere((element) => element.id == mealId));
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((element) => element.id == mealId));
+      });
     }
+  }
+
+  bool _isMealFavorite(String id){
+    return _favoriteMeals.any((element)=>element.id==id);
   }
 
   @override
@@ -90,7 +96,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (ctx)=> TabsScreen(_favoriteMeals), //anonymous builder function
         '/category-meals': (ctx) => CategoryMealsScreen(_availableMeals),
-        '/meal-detail': (ctx)=> MealDetailScreen(),
+        '/meal-detail': (ctx)=> MealDetailScreen(_toggleFavorite, _isMealFavorite),
         FiltersScreen.routeName: (ctx)=> FiltersScreen(_filters, _setFilters),
       },
 //      onGenerateRoute: (settings){

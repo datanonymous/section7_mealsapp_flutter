@@ -9,7 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeItem;
+//  final Function removeItem;
 
   MealItem({
     @required this.id,
@@ -18,7 +18,7 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
-    @required this.removeItem,
+//    @required this.removeItem,
   });
 
   //getters are needed to convert enums into human readable form
@@ -66,7 +66,7 @@ class MealItem extends StatelessWidget {
           },
         ).then((value) { //when MealDetailScreen has popped, then do this
           if(value!=null){
-            removeItem(value);
+//            removeItem(value);
           }
           print(value);
         });
